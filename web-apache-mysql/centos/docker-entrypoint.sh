@@ -592,7 +592,7 @@ prepare_web_server_apache() {
     if [ -f "/etc/httpd/conf/httpd.conf" ]; then
         echo "**** Updating httpd.conf"
         
-        sed '/Listen /{s/\([0-9]\+\)/8080/; :a;n; ba}' "/etc/httpd/conf/httpd.conf"
+        sed -ri -e 's/Listen 80/Listen 8080/' "/etc/httpd/conf/httpd.conf"
         sed -ri \
             -e 's!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g' \
             -e 's!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g' \
