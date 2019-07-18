@@ -87,13 +87,10 @@ RUN set -eux && \
 	chgrp -R 0 /run/httpd && \
 	chmod -R a+rwx /run/httpd && \
 	chmod -R a+rwx /var/run/httpd 
-	
 
 EXPOSE 8080/TCP 
 
 WORKDIR /usr/share/zabbix
-
-
 
 COPY ["conf/etc/zabbix/apache.conf", "/etc/zabbix/"]
 COPY ["conf/etc/zabbix/apache_ssl.conf", "/etc/zabbix/"]
@@ -102,8 +99,8 @@ COPY ["conf/etc/php.d/99-zabbix.ini", "/etc/php.d/"]
 COPY ["docker-entrypoint.sh", "/usr/bin/"]
 
 RUN chmod -R a+rwx /etc/zabbix && \
-RUN chmod -R a+rwx /etc/php.d && \
-RUN chmod -R a+rwx /etc/httpd \
+ chmod -R a+rwx /etc/php.d && \
+ chmod -R a+rwx /etc/httpd
 
 USER apache
 
