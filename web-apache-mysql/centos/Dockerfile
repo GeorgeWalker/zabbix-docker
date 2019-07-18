@@ -97,4 +97,7 @@ COPY ["conf/etc/zabbix/web/zabbix.conf.php", "/etc/zabbix/web/"]
 COPY ["conf/etc/php.d/99-zabbix.ini", "/etc/php.d/"]
 COPY ["docker-entrypoint.sh", "/usr/bin/"]
 
+chgrp -R 0 /run/httpd
+chmod -R a+rw /run/httpd
+
 ENTRYPOINT ["docker-entrypoint.sh"]
