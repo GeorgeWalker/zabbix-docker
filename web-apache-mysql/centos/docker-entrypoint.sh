@@ -590,6 +590,7 @@ prepare_web_server_apache() {
     fi
 
     if [ -f "/etc/httpd/conf/httpd.conf" ]; then
+		sed -i '0,/Listen [0-9]*/s//Listen 8080/' "/etc/httpd/conf/httpd.conf"
         sed -ri \
             -e 's!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g' \
             -e 's!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g' \
