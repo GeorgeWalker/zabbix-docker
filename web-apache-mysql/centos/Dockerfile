@@ -85,9 +85,11 @@ RUN set -eux && \
     yum ${YUM_FLAGS_PERSISTENT} clean all && \
     rm -rf /var/cache/yum/ && \
 	chgrp -R 0 /run/httpd && \
-	chmod -R a+rw /run/httpd
+	chmod -R a+rwx /run/httpd && \
+	chmod -R a+rwx /var/run/httpd 
+	
 
-EXPOSE 80/TCP 443/TCP
+EXPOSE 8080/TCP 
 
 WORKDIR /usr/share/zabbix
 
@@ -99,6 +101,6 @@ COPY ["conf/etc/zabbix/web/zabbix.conf.php", "/etc/zabbix/web/"]
 COPY ["conf/etc/php.d/99-zabbix.ini", "/etc/php.d/"]
 COPY ["docker-entrypoint.sh", "/usr/bin/"]
 
-
+USER apache
 
 ENTRYPOINT ["docker-entrypoint.sh"]
