@@ -149,7 +149,7 @@ prepare_system() {
     ZBX_ADD_PROXY=${ZBX_ADD_PROXY:-"false"}
     ZBX_PROXY_DB=${ZBX_PROXY_DB:-"sqlite3"}
     ZBX_ADD_WEB=${ZBX_ADD_WEB:-"true"}
-    ZBX_WEB_SERVER=${ZBX_WEB_SERVER:-"nginx"}
+    ZBX_WEB_SERVER=${ZBX_WEB_SERVER:-"apache"}
     DB_SERVER_HOST=${DB_SERVER_HOST:-"localhost"}
     [ "${ZBX_ADD_JAVA_GATEWAY}" == "true" ] && ZBX_JAVAGATEWAY_ENABLE="true"
     [ "${ZBX_ADD_JAVA_GATEWAY}" == "true" ] && ZBX_JAVAGATEWAY="localhost"
@@ -590,7 +590,10 @@ prepare_web_server_apache() {
     fi
 
     if [ -f "/etc/httpd/conf/httpd.conf" ]; then
-		sed -i '0,/Listen [0-9]*/s//Listen 8080/' "/etc/httpd/conf/httpd.conf"
+	
+		echo "**** Updating httpd.conf"
+	
+		sed '/Listen /{s/\([0-9]\+\)/8080/; :a;n; ba}' "/etc/httpd/conf/httpd.conf"
         sed -ri \
             -e 's!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g' \
             -e 's!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g' \
