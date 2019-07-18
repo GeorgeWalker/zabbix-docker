@@ -93,7 +93,7 @@ EXPOSE 8080/TCP
 
 WORKDIR /usr/share/zabbix
 
-VOLUME ["/etc/ssl/apache2"]
+
 
 COPY ["conf/etc/zabbix/apache.conf", "/etc/zabbix/"]
 COPY ["conf/etc/zabbix/apache_ssl.conf", "/etc/zabbix/"]
@@ -101,6 +101,12 @@ COPY ["conf/etc/zabbix/web/zabbix.conf.php", "/etc/zabbix/web/"]
 COPY ["conf/etc/php.d/99-zabbix.ini", "/etc/php.d/"]
 COPY ["docker-entrypoint.sh", "/usr/bin/"]
 
+RUN chmod -R a+rwx /etc/zabbix && \
+RUN chmod -R a+rwx /etc/php.d && \
+RUN chmod -R a+rwx /etc/httpd \
+
 USER apache
+
+VOLUME ["/etc/ssl/apache2"]
 
 ENTRYPOINT ["docker-entrypoint.sh"]
