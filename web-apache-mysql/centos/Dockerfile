@@ -83,7 +83,9 @@ RUN set -eux && \
                 xargs -I '{}' bash -c 'echo "{}" && localedef -c -i {} -f UTF-8 {}.UTF-8 2>/dev/null' && \
     chown --quiet -R apache:apache /usr/share/zabbix && \
     yum ${YUM_FLAGS_PERSISTENT} clean all && \
-    rm -rf /var/cache/yum/
+    rm -rf /var/cache/yum/ && \
+	chgrp -R 0 /run/httpd && \
+	chmod -R a+rw /run/httpd
 
 EXPOSE 80/TCP 443/TCP
 
@@ -97,7 +99,6 @@ COPY ["conf/etc/zabbix/web/zabbix.conf.php", "/etc/zabbix/web/"]
 COPY ["conf/etc/php.d/99-zabbix.ini", "/etc/php.d/"]
 COPY ["docker-entrypoint.sh", "/usr/bin/"]
 
-RUN chgrp -R 0 /run/httpd && \
-	chmod -R a+rw /run/httpd
+
 
 ENTRYPOINT ["docker-entrypoint.sh"]
