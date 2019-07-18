@@ -1154,7 +1154,7 @@ elif [ "$zbx_type" == "proxy" ]; then
     exec su zabbix -s "/bin/bash" -c "/usr/sbin/zabbix_proxy --foreground -c /etc/zabbix/zabbix_proxy.conf"
 elif [ "$zbx_type" == "server" ]; then
     echo "** Starting Zabbix server"
-    exec su zabbix -s "/bin/bash" -c "/usr/sbin/zabbix_server --foreground -c /etc/zabbix/zabbix_server.conf"
+    exec zabbix -s "/bin/bash" -c "/usr/sbin/zabbix_server --foreground -c /etc/zabbix/zabbix_server.conf"
 elif [ "$zbx_type" == "java-gateway" ]; then
     echo "** Starting Zabbix Java Gateway"
     exec su zabbix -s "/bin/bash" -c "/usr/sbin/zabbix_java_gateway"
