@@ -88,7 +88,7 @@ RUN set -eux && \
 	mkdir -p /run/httpd && \
 	chmod -R a+rwx /run && \
 	chmod -R a+rwx /run/httpd && \	
-	chmod -R a+rwx /var/run/httpd &&
+	chmod -R a+rwx /var/run/httpd && \
 	chmod -R a+rwx /var/lib/php
 	
 
