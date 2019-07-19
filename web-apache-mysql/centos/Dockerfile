@@ -86,7 +86,8 @@ RUN set -eux && \
     rm -rf /var/cache/yum/ && \
 	chgrp -R 0 /run/httpd && \
 	mkdir -p /run/httpd && \
-	chmod -R a+rwx /run/httpd && \
+	chmod -R a+rwx /run && \
+	chmod -R a+rwx /run/httpd && \	
 	chmod -R a+rwx /var/run/httpd 
 
 EXPOSE 8080/TCP 

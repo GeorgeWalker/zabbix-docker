@@ -1,5 +1,5 @@
 #!/bin/bash
-
+mkdir -p /run/httpd
 set -eo pipefail
 
 set +e
