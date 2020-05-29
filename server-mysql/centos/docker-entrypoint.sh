@@ -1148,16 +1148,16 @@ if [ "$1" != "" ]; then
     exec "$@"
 elif [ "$zbx_type" == "agent" ]; then
     echo "** Starting Zabbix agent"
-    exec su zabbix -s "/bin/bash" -c "/usr/sbin/zabbix_agentd --foreground -c /etc/zabbix/zabbix_agentd.conf"
+    exec zabbix -s "/bin/bash" -c "/usr/sbin/zabbix_agentd --foreground -c /etc/zabbix/zabbix_agentd.conf"
 elif [ "$zbx_type" == "proxy" ]; then
     echo "** Starting Zabbix proxy"
-    exec su zabbix -s "/bin/bash" -c "/usr/sbin/zabbix_proxy --foreground -c /etc/zabbix/zabbix_proxy.conf"
+    exec zabbix -s "/bin/bash" -c "/usr/sbin/zabbix_proxy --foreground -c /etc/zabbix/zabbix_proxy.conf"
 elif [ "$zbx_type" == "server" ]; then
     echo "** Starting Zabbix server"
     exec /bin/bash -c "/usr/sbin/zabbix_server --foreground -c /etc/zabbix/zabbix_server.conf"
 elif [ "$zbx_type" == "java-gateway" ]; then
     echo "** Starting Zabbix Java Gateway"
-    exec su zabbix -s "/bin/bash" -c "/usr/sbin/zabbix_java_gateway"
+    exec zabbix -s "/bin/bash" -c "/usr/sbin/zabbix_java_gateway"
 elif [ "$zbx_type" == "frontend" ] && [ "$zbx_opt_type" == "apache" ]; then
     echo "** Starting Zabbix frontend"
     if [ -f "/usr/sbin/httpd" ]; then
